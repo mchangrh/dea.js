@@ -1,0 +1,24 @@
+{
+  "name": "@mchangrh/dea.js",
+  "version": "1.0.0",
+  "description": "DeArrow for restrictive environments",
+  "main": "docs/dea.min.js",
+  "scripts": {
+    "build": "node build/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "node build/version-up.js && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mchangrh/dea.js.git"
+  },
+  "author": "Michael Chang <michael@mchang.name>",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/mchangrh/dea.js/issues"
+  },
+  "homepage": "https://github.com/mchangrh/dea.js#readme",
+  "devDependencies": {
+    "uglify-js": "^3.17.3"
+  }
+}

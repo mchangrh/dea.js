@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html><head>
+  <title>dea.js CDN Check</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    .parent {
+      font-size: 1.5em;
+    }
+    span {
+      height: 1em;
+    }
+    img {
+      max-height: 0.9em;
+    }
+    div, body, select, button, a {
+      background: #111;
+      color: #ddd;
+      display: flex;
+      font-size: 1em;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    button {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #777;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <pre class="hero" style="min-height: 98vmin;">
+    <div id="cdn-parent" class="parent">
+      <p>If the favicon appears, the site is reachable</p>
+      <p id="version">Latest Version:</p>
+    </div>
+    <div id="server-parent" class="parent">
+      <span class="badge">sponsor.ajay.app (Cloudflare) <img src="https://sponsor.ajay.app/LogoSponsorBlockSimple256px.png"></span>
+      <span class="badge">api.sponsor.ajay.app (Direct) <img src="https://api.sponsor.ajay.app/LogoSponsorBlockSimple256px.png"></span>
+    </div>
+    <div id="select-parent" style="flex-direction: row;">
+      <select name="cdn" id="cdn-select"></select>
+      <select name="script" id="script-select">
+        <option value="dea.user.js">userscript</option>
+        <option value="dea-config.user.js">userscript with config</option>
+        <option value="dea.bookmarklet.js">bookmarklet</option>
+        <option value="dea.min.js">minified (console)</option>
+        <option value="dea.js">console</option>
+        <option value="dea-loader.user.js">userscript loader</option>
+        <option value="dea-nosettings.min.js">loader target</option>
+      </select>
+      <button onclick="generateLink()">Generate Link</button>
+    </div>
+    <a id="generate-result" style="text-decoration: none;"></a>
+  </pre>
+  <footer>
+    <pre>
+      <a href="https://github.com/mchangrh/dea.js">GitHub</a>
+    </pre>
+  </footer>
+  <script>
+    const cdnroots = {
+      "GitHub": "https://raw.githubusercontent.com/mchangrh/dea.js/main/docs/",
+      "GitHub Pages": "https://mchangrh.github.io/dea.js/",
+      "JSDelivr (GitHub)": "https://cdn.jsdelivr.net/gh/mchangrh/dea.js/docs/",
+    }
+    function checkCDN() {
+      const parentElem = document.getElementById("cdn-parent")
+      const selectElem = document.getElementById("cdn-select")
+      for (const [name, root] of Object.entries(cdnroots)) {
+        // img
+        const badge = document.createElement("img")
+        badge.src = root + "favicon.png"
+        // text
+        const elem = document.createElement("span");
+        elem.innerText = name + ": "
+        elem.appendChild(badge)
+        parentElem.appendChild(elem)
+        // select
+        const option = document.createElement("option")
+        option.text = name
+        selectElem.add(option)
+      }
+    }
+    function generateLink() {
+      const cdn = document.getElementById("cdn-select").value
+      const script = document.getElementById("script-select").value
+      const result = document.getElementById("generate-result")
+      const text = cdnroots[cdn] + script
+      result.href = text
+      result.text = text
+    }
+    fetch("https://raw.githubusercontent.com/mchangrh/dea.js/main/src/version.json")
+      .then(response => response.json())
+      .then(data => document.getElementById("version").innerText = `Latest Version: ${data.version}`)
+    checkCDN()
+  </script>
+</body></html>
