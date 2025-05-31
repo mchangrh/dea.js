@@ -41,7 +41,7 @@ It is recommended to use the [CDN Check Page](docs/index.html) as it will check 
 - JSDelivr (GitHub): `https://cdn.jsdelivr.net/gh/mchangrh/dea.js/docs/dea.min.js`
 
 # DEA.js vs DeArrow (extension)
-|  | SB.js | Extension |
+|  | DEA.js | Extension |
 |---|---|---|
 | Toggle | ❌ | ✅ |
 | Voting | ❌ | ✅ |
